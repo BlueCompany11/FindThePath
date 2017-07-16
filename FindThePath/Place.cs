@@ -20,11 +20,17 @@ namespace FindThePath
         string _address { get; set; }
         int _position { get; set; }
         //max amount of places to input
-        const int n = 15;   
-        static int[,] Distances=new int [n,n];  
+        const int n = 15;
+        public static int[,] Distances = new int[n, n];    //private
         //an output where adresses are in the correct order
-        static string[] Addresses = new string[n];
-        static List<Place> Container = new List<Place>();    
+        public static string[] Addresses = new string[n];  //private
+        public static List<Place> Container = new List<Place>();
+
+        public static void FindThePath()
+        {
+            GeneratePlaces();
+            PrintAddresses(InOrderAddresses(Algorithms.NaiveAlogrithm(Container, Distances)));
+        }
 
         public Place(string address,int position)
         {
@@ -79,7 +85,30 @@ namespace FindThePath
                 }
             }
         }
-        
+
+        public static void PrintAddresses(int distance)
+        {
+            for (int i = 0; i < Container.Count; ++i)
+            {
+                Console.WriteLine($"{i}. {Addresses[i]}");
+            }
+            Console.WriteLine("Total distance is {0} meters", distance);
+        }
+        /// <summary>
+        /// An argument is an array with permutations for the shortest way.
+        /// That distance is placed on the last position of the array.
+        /// </summary>
+        /// <param name="t"></param>
+        public static int InOrderAddresses(int[] t)
+        {
+            int size = t.Length - 1;//last position is the distance 
+            for (int i = 0; i < size; ++i)
+            {
+                Addresses[i] = Container[t[i]]._address;
+            }
+            return t[size];
+        }
+
         /// <summary>
         /// Reads the distance from google maps in meters
         /// </summary>

@@ -17,37 +17,33 @@ namespace FindThePath
 {
     class TestClass
     {
-        static public void SetAPlace(string address)
-        { 
-            GeocodingRequest geocodeRequest = new GeocodingRequest()
-            {
-                Address = address,
-            };
-            var geocodingEngine = GoogleMaps.Geocode;
-            GeocodingResponse geocode = geocodingEngine.Query(geocodeRequest);
-            Console.WriteLine(geocode);
-        }
-        static public IEnumerable<IEnumerable<T>>
-GetPermutations<T>(IEnumerable<T> list, int length)
+        static string[] t = new string[3];
+        public static void fun()
         {
-            if (length == 1) return list.Select(t => new T[] { t });
-
-            return GetPermutations(list, length - 1)
-                .SelectMany(t => list.Where(e => !t.Contains(e)),
-                    (t1, t2) => t1.Concat(new T[] { t2 }));
+            for(int i = 0; i < 3; ++i)
+            {
+                t[i] = i.ToString();
+            }
         }
         public static void fun2()
         {
-            IEnumerable<IEnumerable<int>> result =
-    GetPermutations(Enumerable.Range(1, 3), 3);
-            foreach(var elem in result)
+            foreach(var elem in t)
             {
-                Console.WriteLine(result.ToString());
+                Console.WriteLine(elem);
             }
         }
+        
+        
+        static public void flist()
+        {
+            List<List<int>> a = new List<List<int>>();
+            a.Add(new List<int> {1,2,3,4 });
+            a[0] = new List<int> { 1, 2, 3, 4 };
+            int[] t = new int[4];
+            t = a[0].ToArray();
+        }
+            
+        
     }
 }
-/*
- * TODO:
- * ADD an algorithm add sql
- */
+

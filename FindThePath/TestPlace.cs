@@ -26,5 +26,12 @@ namespace FindThePath
                 Console.WriteLine();
             }
         }
+        static public void TestAddresses()
+        {
+            foreach(var elem in Addresses)
+            {
+                Console.WriteLine(elem);
+            }
+        }
     }
 }
