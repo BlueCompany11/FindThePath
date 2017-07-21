@@ -13,6 +13,7 @@ namespace FindThePath
         static void Main(string[] args)
         {
             Place.FindThePath();
+            Place.SaveToFile();
             Console.ReadKey();
            
         }

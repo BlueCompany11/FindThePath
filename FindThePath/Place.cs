@@ -12,6 +12,7 @@ using GoogleMapsApi.Entities.Geocoding.Request;
 using GoogleMapsApi.Entities.Geocoding.Response;
 using GoogleMapsApi.StaticMaps;
 using GoogleMapsApi.StaticMaps.Entities;
+using System.IO;
 
 namespace FindThePath
 {
@@ -21,9 +22,9 @@ namespace FindThePath
         int _position { get; set; }
         //max amount of places to input
         const int n = 15;
-        public static int[,] Distances = new int[n, n];    //private
+        public static int[,] Distances = new int[n, n];    
         //an output where adresses are in the correct order
-        public static string[] Addresses = new string[n];  //private
+        public static string[] Addresses = new string[n];  
         public static List<Place> Container = new List<Place>();
 
         public static void FindThePath()
@@ -47,13 +48,15 @@ namespace FindThePath
             char finisher;
             string address;
             int position;
-            Console.WriteLine("If you would like to finish press n, otherwise any other letter will do.");
+            Console.WriteLine("Type the street, it's number, and the city.");
+            Console.WriteLine("When asked to finish press n to stop inserting data" +
+                ", otherwise any other letter will do to continue.");
             do
             { 
                 address = SetAnAddress();
                 position = Container.Count;
                 Place NewPlace = new Place(address, position);
-                Console.WriteLine("Continue?");
+                Console.Write("Continue? ");
                 finisher = Console.ReadKey().KeyChar;
                 Console.WriteLine();
             } while (finisher != 'n' && finisher != 'N');
@@ -164,6 +167,17 @@ namespace FindThePath
             return sContents;
         }
 
+        public static void SaveToFile()
+        {
+            string strPath = Environment.GetFolderPath(
+                         System.Environment.SpecialFolder.DesktopDirectory);
+           
+            using (StreamWriter outputFile = new StreamWriter(strPath + @"\The shortest path.txt"))
+            {
+                foreach (string line in Addresses)
+                    outputFile.WriteLine(line);
+            }
+        }
 
         override public string ToString()
         {

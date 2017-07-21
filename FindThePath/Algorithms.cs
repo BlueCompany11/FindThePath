@@ -52,11 +52,11 @@ namespace FindThePath
                 treturn2[i] = treturn[i];
             }
             treturn2[cont.Count] = shortest;
-            foreach(var elem in treturn2)
-            {
-                Console.Write($"{elem} , ");
-            }
-            Console.WriteLine();
+            //foreach(var elem in treturn2)
+            //{
+            //    Console.Write($"{elem} , ");
+            //}
+            //Console.WriteLine();
             return treturn2;
 
         }
