@@ -20,6 +20,8 @@ namespace FindThePath
     {
         string _address { get; set; }
         int _position { get; set; }
+        //if there is no prearranged first and last place the variable is false
+        public static bool _sophisticated { get; set; }
         //max amount of places to input
         const int n = 15;
         public static int[,] Distances = new int[n, n];    
@@ -51,6 +53,15 @@ namespace FindThePath
             Console.WriteLine("Type the street, it's number, and the city.");
             Console.WriteLine("When asked to finish press n to stop inserting data" +
                 ", otherwise any other letter will do to continue.");
+            Console.WriteLine("Do you have in mind the first and the last place to visit?");
+            Console.WriteLine("If yes enter the first place as first and the last as the second.");
+            Console.Write("Y/N? ");
+            char decision=Console.ReadKey().KeyChar;
+            Console.WriteLine();
+            if (decision.ToString().ToUpper() == "Y")
+            {
+                _sophisticated = true;
+            }
             do
             { 
                 address = SetAnAddress();

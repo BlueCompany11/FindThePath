@@ -28,6 +28,11 @@ namespace FindThePath
             {
                 temp = 0;
                 t = comb[i].ToArray();
+                //if the first and the last place it is on it's positions 
+                if (Place._sophisticated == true && (t[0] != 0 || t[t.Length - 1] != 1))
+                {
+                    continue;   //skip this iteration
+                }
                 for (int j = 0, len = cont.Count - 1; j < len; ++j)
                 {
                     if (t[j] > t[j + 1])
